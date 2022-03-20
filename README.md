@@ -81,6 +81,7 @@ Options:
                                          will be excluded. [Super-Advanced, Please don’t use] If you wish to emulate ‘--include’, you may use ‘--exclude "*" ".*"
                                          "!path-to-include" ...’. The problem with ‘--include’ is that if you change your project structure but forget to change the caxa
                                          invocation, then things will subtly fail only in the packaged version.
+  -a, --app-directory                    [Advanced] The directory where the application will be deployed.
   -d, --dedupe                           [Advanced] Run ‘npm dedupe --production’ on the build directory. (default: true)
   -D, --no-dedupe
   -p, --prepare-command <command>        [Advanced] Command to run on the build directory while packaging.
