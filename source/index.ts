@@ -131,15 +131,15 @@ export default async function caxa({
         #!/usr/bin/env sh
         ${
           appDirectory === undefined
-            ? bash`export CAXA_TEMPORARY_DIRECTORY="$(dirname $(mktemp))/caxa"`
-            : bash`export CAXA_TEMPORARY_DIRECTORY="${appDirectory}/caxa"`
+            ? bash`export APP_DIRECTORY="$(dirname $(mktemp))/caxa"`
+            : bash`export APP_DIRECTORY="${appDirectory}/caxa"`
         }
         export CAXA_EXTRACTION_ATTEMPT=-1
         while true
         do
           export CAXA_EXTRACTION_ATTEMPT=$(( CAXA_EXTRACTION_ATTEMPT + 1 ))
-          export CAXA_LOCK="$CAXA_TEMPORARY_DIRECTORY/locks/${identifier}/$CAXA_EXTRACTION_ATTEMPT"
-          export CAXA_APPLICATION_DIRECTORY="$CAXA_TEMPORARY_DIRECTORY/applications/${identifier}/$CAXA_EXTRACTION_ATTEMPT"
+          export CAXA_LOCK="$APP_DIRECTORY/locks/${identifier}/$CAXA_EXTRACTION_ATTEMPT"
+          export CAXA_APPLICATION_DIRECTORY="$APP_DIRECTORY/applications/${identifier}/$CAXA_EXTRACTION_ATTEMPT"
           if [ -d "$CAXA_APPLICATION_DIRECTORY" ] 
           then
             if [ -d "$CAXA_LOCK" ] 
