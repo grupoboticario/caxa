@@ -17,6 +17,7 @@ export default async function caxa({
   command,
   force = true,
   exclude = [],
+  appDirectory,
   filter = (() => {
     const pathsToExclude = globby
       .sync(exclude, {
@@ -50,6 +51,7 @@ export default async function caxa({
   command: string[];
   force?: boolean;
   exclude?: string[];
+  appDirectory?: string;
   filter?: fs.CopyFilterSync | fs.CopyFilterAsync;
   dedupe?: boolean;
   prepareCommand?: string;
@@ -127,7 +129,11 @@ export default async function caxa({
     let stub =
       bash`
         #!/usr/bin/env sh
-        export CAXA_TEMPORARY_DIRECTORY="$(dirname $(mktemp))/caxa"
+        ${
+          appDirectory === undefined
+            ? bash`export CAXA_TEMPORARY_DIRECTORY="$(dirname $(mktemp))/caxa"`
+            : bash`export CAXA_TEMPORARY_DIRECTORY="${appDirectory}/caxa"`
+        }
         export CAXA_EXTRACTION_ATTEMPT=-1
         while true
         do
@@ -181,7 +187,7 @@ export default async function caxa({
     await appendTarballOfBuildDirectoryToOutput();
     await fs.appendFile(
       output,
-      "\n" + JSON.stringify({ identifier, command, uncompressionMessage })
+      "\n" + JSON.stringify({ identifier, command, appDirectory, uncompressionMessage })
     );
   }
 
@@ -216,6 +222,10 @@ if (require.main === module)
         "-e, --exclude <path...>",
         `[Advanced] Paths to exclude from the build. The paths are passed to https://github.com/sindresorhus/globby and paths that match will be excluded. [Super-Advanced, Please don’t use] If you wish to emulate ‘--include’, you may use ‘--exclude "*" ".*" "!path-to-include" ...’. The problem with ‘--include’ is that if you change your project structure but forget to change the caxa invocation, then things will subtly fail only in the packaged version.`
       )
+      .option(
+        "-a, --app-dir <directory>",
+        `[Advanced] The directory where the application will be deployed.`
+      )      
       .option(
         "-d, --dedupe",
         "[Advanced] Run ‘npm dedupe --production’ on the build directory.",
@@ -278,6 +288,7 @@ Examples:
             output,
             force,
             exclude = [],
+            appDirectory,
             dedupe,
             prepareCommand,
             includeNode,
@@ -290,6 +301,7 @@ Examples:
             output: string;
             force?: boolean;
             exclude?: string[];
+            appDirectory?: string;
             dedupe?: boolean;
             prepareCommand?: string;
             includeNode?: boolean;
@@ -306,6 +318,7 @@ Examples:
               command,
               force,
               exclude,
+              appDirectory,
               dedupe,
               prepareCommand,
               includeNode,

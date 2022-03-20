@@ -40,6 +40,7 @@ func main() {
 	var footer struct {
 		Identifier           string   `json:"identifier"`
 		Command              []string `json:"command"`
+		AppDirectory         string   `json:"appDirectory"`
 		UncompressionMessage string   `json:"uncompressionMessage"`
 	}
 	if err := json.Unmarshal(footerString, &footer); err != nil {
@@ -48,8 +49,12 @@ func main() {
 
 	var applicationDirectory string
 	for extractionAttempt := 0; true; extractionAttempt++ {
-		lock := path.Join(os.TempDir(), "caxa/locks", footer.Identifier, strconv.Itoa(extractionAttempt))
-		applicationDirectory = path.Join(os.TempDir(), "caxa/applications", footer.Identifier, strconv.Itoa(extractionAttempt))
+		dir := os.TempDir()
+		if footer.AppDirectory != "" {
+			dir = footer.AppDirectory
+		}
+		lock := path.Join(dir, "caxa/locks", footer.Identifier, strconv.Itoa(extractionAttempt))
+		applicationDirectory = path.Join(dir, "caxa/applications", footer.Identifier, strconv.Itoa(extractionAttempt))
 		applicationDirectoryFileInfo, err := os.Stat(applicationDirectory)
 		if err != nil && !errors.Is(err, os.ErrNotExist) {
 			log.Fatalf("caxa stub: Failed to find information about the application directory: %v", err)
