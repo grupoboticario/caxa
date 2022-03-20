@@ -187,7 +187,13 @@ export default async function caxa({
     await appendTarballOfBuildDirectoryToOutput();
     await fs.appendFile(
       output,
-      "\n" + JSON.stringify({ identifier, command, appDirectory, uncompressionMessage })
+      "\n" +
+        JSON.stringify({
+          identifier,
+          command,
+          appDirectory,
+          uncompressionMessage,
+        })
     );
   }
 
@@ -225,7 +231,7 @@ if (require.main === module)
       .option(
         "-a, --app-dir <directory>",
         `[Advanced] The directory where the application will be deployed.`
-      )      
+      )
       .option(
         "-d, --dedupe",
         "[Advanced] Run ‘npm dedupe --production’ on the build directory.",
