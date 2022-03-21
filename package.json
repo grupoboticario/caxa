@@ -7,7 +7,13 @@
     "caxa": "distribution/index.js"
   },
   "types": "distribution/index.d.ts",
-  "repository": "leafac/caxa",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/casamagalhaes/caxa.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "keywords": [
     "packing",
     "deployment",
