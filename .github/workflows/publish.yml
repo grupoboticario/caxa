@@ -28,9 +28,7 @@ jobs:
       - run: npm --no-git-tag-version version $TAG
         env:
             TAG: ${{ github.event.release.tag_name }}              
-      - run: npm ci
-      - run: echo "@casamagalhaes:registry = https://npm.pkg.github.com/" > .npmrc          
-      - run: npm publish
+      - run: npm ci && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_GITHUB_TOKEN }}
 

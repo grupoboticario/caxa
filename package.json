@@ -1,5 +1,5 @@
 {
-  "name": "caxa",
+  "name": "@casamagalhaes/caxa",
   "version": "2.1.0",
   "description": "Package Node.js applications into executable binaries",
   "main": "distribution/index.js",
