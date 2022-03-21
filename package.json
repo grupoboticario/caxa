@@ -21,8 +21,6 @@
   ],
   "author": "Leandro Facchinetti <caxa@leafac.com> (https://leafac.com)",
   "license": "MIT",
-  "bugs": "https://github.com/leafac/caxa/issues",
-  "homepage": "https://github.com/leafac/caxa#readme",
   "scripts": {
     "test": "prettier --check \"source/**/*\" --end-of-line auto && jest",
     "prepare": "tsc",
