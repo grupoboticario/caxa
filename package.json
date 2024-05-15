@@ -1,6 +1,6 @@
 {
   "name": "@grupoboticario/caxa",
-  "version": "2.1.0",
+  "version": "0.0.0-dev",
   "description": "Package Node.js applications into executable binaries",
   "main": "distribution/index.js",
   "bin": {
