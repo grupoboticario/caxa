@@ -11,16 +11,16 @@
   );
   await fs.ensureDir(temporaryDirectory);
 
-  const { Database, sql } = require("@leafac/sqlite");
+  const Database = require("better-sqlite3");
   const database = new Database(path.join(temporaryDirectory, "database.db"));
-  database.execute(sql`CREATE TABLE caxaExampleNativeModules (example TEXT);`);
-  database.run(
-    sql`INSERT INTO caxaExampleNativeModules (example) VALUES (${"caxa native modules"})`
-  );
+  database.prepare(`CREATE TABLE caxaExampleNativeModules (example TEXT);`).run();
+  database.prepare(
+    `INSERT INTO caxaExampleNativeModules (example) VALUES (?)`
+  ).run("caxa native modules");
   console.log(
     "@leafac/sqlite:",
     JSON.stringify(
-      database.get(sql`SELECT example FROM caxaExampleNativeModules`),
+      database.prepare(`SELECT example FROM caxaExampleNativeModules`).get(),
       undefined,
       2
     )
