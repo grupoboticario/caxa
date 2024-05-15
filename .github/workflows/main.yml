@@ -5,9 +5,9 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos, ubuntu, windows]
+        os: [macos-13, ubuntu-latest, windows-latest]
         node-version: [16]
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v5
