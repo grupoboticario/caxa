@@ -5,7 +5,7 @@ jobs:
   test:
     strategy:
       matrix:
-        os: [macos-13, [self-hosted, vs-franqueado], windows-latest]
+        os: [macos-13, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
