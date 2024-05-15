@@ -1,5 +1,5 @@
 {
-  "name": "@casamagalhaes/caxa",
+  "name": "@grupoboticario/caxa",
   "version": "2.1.0",
   "description": "Package Node.js applications into executable binaries",
   "main": "distribution/index.js",
@@ -9,7 +9,7 @@
   "types": "distribution/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/casamagalhaes/caxa.git"
+    "url": "git+https://github.com/grupoboticario/caxa.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"

@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://npm.pkg.github.com
-          scope: '@casamagalhaes'    
+          scope: '@grupoboticario'    
       - run: npm --no-git-tag-version version $TAG
         env:
             TAG: ${{ github.event.release.tag_name }}              
